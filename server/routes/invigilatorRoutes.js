@@ -27,4 +27,11 @@ router.delete('/:id', async (req, res) => {
   res.json({ message: 'Invigilator deleted' });
 });
 
+// Update invigilator availability
+router.put('/availability/:id', async (req, res) => {
+    const { isAvailable } = req.body;
+    const invigilator = await Invigilator.findByIdAndUpdate(req.params.id, { isAvailable }, { new: true });
+    res.json(invigilator);
+});
+
 module.exports = router;

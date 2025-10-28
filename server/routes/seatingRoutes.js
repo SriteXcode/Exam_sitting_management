@@ -114,14 +114,7 @@ router.post('/reallocate/:studentId/:scheduleId', async (req, res) => {
   }
 });
 
-router.post('/generate/:scheduleId', async (req, res) => {
-  try {
-    const result = await generateSeatingPlanController(req.params.scheduleId);
-    res.status(200).json(result);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+
 
 
 module.exports = router;

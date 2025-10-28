@@ -2,16 +2,24 @@ const SeatingPlan = require('../models/SeatingPlan');
 const Student = require('../models/Student');
 const ExamSchedule = require('../models/ExamSchedule');
 const ExamHall = require('../models/ExamHall');
+const Department = require('../models/Department');
 
 const generateSeatingPlan = async (scheduleId) => {
   try {
     const schedule = await ExamSchedule.findById(scheduleId).populate('subject');
 
+    const department = await Department.findOne({ name: schedule.department });
+    if (!department) {
+      throw new Error(`Department not found: ${schedule.department}`);
+    }
+
     const students = await Student.find({
       semester: schedule.semester,
-      department: schedule.department,
-      subjects: schedule.subject.name
+      department: department._id,
+      subjects: schedule.subject._id
     });
+
+    console.log(`Found ${students.length} students for schedule ${scheduleId}`);
 
     const halls = await ExamHall.find();
     const totalSeats = halls.reduce((acc, h) => acc + h.capacity, 0);

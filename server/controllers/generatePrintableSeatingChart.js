@@ -11,14 +11,18 @@ const generatePrintableChart = async (examScheduleId) => {
     const hallMap = {};
 
     for (const plan of plans) {
-      const hallName = plan.hall.name;
-      if (!hallMap[hallName]) hallMap[hallName] = [];
+      if (plan.hall && plan.student) {
+        const hallName = plan.hall.name;
+        if (!hallMap[hallName]) {
+          hallMap[hallName] = [];
+        }
 
-      hallMap[hallName].push({
-        seatNumber: plan.seatNumber,
-        name: plan.student.name,
-        roll: plan.student.rollNumber, // adjust as per your schema
-      });
+        hallMap[hallName].push({
+          seatNumber: plan.seatNumber,
+          name: plan.student.name,
+          roll: plan.student.rollNo, // Corrected field name
+        });
+      }
     }
 
     // Sort each hall’s seats by number (optional)

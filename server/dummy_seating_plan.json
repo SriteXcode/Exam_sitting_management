@@ -1,0 +1,45 @@
+
+[
+  {
+    "_id": { "$oid": "635f8e1d1f7b4c8b4d1e8e01" },
+    "student": { "$oid": "635f8d1d1f7b4c8b4d1e8d01" },
+    "examSchedule": { "$oid": "635f8c3d1f7b4c8b4d1e8c01" },
+    "hall": { "$oid": "635f8b9d1f7b4c8b4d1e8b01" },
+    "seatNumber": "Seat-1"
+  },
+  {
+    "_id": { "$oid": "635f8e1d1f7b4c8b4d1e8e02" },
+    "student": { "$oid": "635f8d1d1f7b4c8b4d1e8d02" },
+    "examSchedule": { "$oid": "635f8c3d1f7b4c8b4d1e8c01" },
+    "hall": { "$oid": "635f8b9d1f7b4c8b4d1e8b01" },
+    "seatNumber": "Seat-2"
+  },
+  {
+    "_id": { "$oid": "635f8e1d1f7b4c8b4d1e8e03" },
+    "student": { "$oid": "635f8d1d1f7b4c8b4d1e8d03" },
+    "examSchedule": { "$oid": "635f8c3d1f7b4c8b4d1e8c01" },
+    "hall": { "$oid": "635f8b9d1f7b4c8b4d1e8b01" },
+    "seatNumber": "Seat-3"
+  },
+  {
+    "_id": { "$oid": "635f8e1d1f7b4c8b4d1e8e04" },
+    "student": { "$oid": "635f8d1d1f7b4c8b4d1e8d04" },
+    "examSchedule": { "$oid": "635f8c3d1f7b4c8b4d1e8c01" },
+    "hall": { "$oid": "635f8b9d1f7b4c8b4d1e8b02" },
+    "seatNumber": "Seat-1"
+  },
+  {
+    "_id": { "$oid": "635f8e1d1f7b4c8b4d1e8e05" },
+    "student": { "$oid": "635f8d1d1f7b4c8b4d1e8d05" },
+    "examSchedule": { "$oid": "635f8c3d1f7b4c8b4d1e8c01" },
+    "hall": { "$oid": "635f8b9d1f7b4c8b4d1e8b02" },
+    "seatNumber": "Seat-2"
+  },
+  {
+    "_id": { "$oid": "635f8e1d1f7b4c8b4d1e8e06" },
+    "student": { "$oid": "635f8d1d1f7b4c8b4d1e8d06" },
+    "examSchedule": { "$oid": "635f8c3d1f7b4c8b4d1e8c01" },
+    "hall": { "$oid": "635f8b9d1f7b4c8b4d1e8b02" },
+    "seatNumber": "Seat-3"
+  }
+]

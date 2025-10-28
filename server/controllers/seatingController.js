@@ -2,6 +2,7 @@ const SeatingPlan = require('../models/SeatingPlan');
 const Student = require('../models/Student');
 const ExamSchedule = require('../models/ExamSchedule');
 const ExamHall = require('../models/ExamHall');
+const Department = require('../models/Department');
 
 /**
  * Generate Seating Plan with subject-based interleaving
@@ -11,10 +12,15 @@ const generateSeatingPlanController = async (scheduleId) => {
     const schedule = await ExamSchedule.findById(scheduleId).populate('subject');
     if (!schedule) throw new Error('Schedule not found.');
 
+    const department = await Department.findOne({ name: schedule.department });
+    if (!department) {
+      throw new Error(`Department not found: ${schedule.department}`);
+    }
+
     const students = await Student.find({
       semester: schedule.semester,
-      department: schedule.department,
-      subjects: schedule.subject.name
+      department: department._id,
+      subjects: schedule.subject._id
     });
 
     const halls = await ExamHall.find();

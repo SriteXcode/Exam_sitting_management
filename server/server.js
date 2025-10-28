@@ -16,12 +16,19 @@ const invigilatorRoutes = require('./routes/invigilatorRoutes');
 const scheduleRoutes = require('./routes/scheduleRoutes');
 const seatingRoutes = require('./routes/seatingRoutes');
 const studentRoutes = require('./routes/studentRoutes');
+const departmentRoutes = require('./routes/departmentRoutes');
+const examRoutes = require('./routes/examRoutes');
+const importRoutes = require('./routes/importRoutes');
 app.use('/api/students', studentRoutes);
 app.use('/api/subjects', subjectRoutes);
 app.use('/api/halls', hallRoutes);
 app.use('/api/invigilators', invigilatorRoutes);
 app.use('/api/schedules', scheduleRoutes);
 app.use('/api/seating', seatingRoutes);
+app.use('/api/departments', departmentRoutes);
+app.use('/api/exams', examRoutes);
+app.use('/api/import', importRoutes);
+app.use('/api/auth', require('./routes/authRoutes'));
 
 
 
