@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const SeatingPlan = require('../models/SeatingPlan');
-const generateSeatingPlan = require('../algorithms/seatingGenerator');
+const { generateSeatingPlan, generateMultipleSeatingPlans } = require('../algorithms/seatingGenerator');
 const generatePrintableChart = require('../controllers/generatePrintableSeatingChart');
 const reallocateSeat = require('../controllers/reallocateSeat');
-const { generateSeatingPlanController } = require('../controllers/seatingController');
 
 router.post('/add', async (req, res) => {
   const seat = await SeatingPlan.create(req.body);
@@ -41,6 +40,20 @@ router.delete('/:id', async (req, res) => {
 router.post('/generate/:scheduleId', async (req, res) => {
   try {
     const result = await generateSeatingPlan(req.params.scheduleId);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/seating/generate-multiple
+router.post('/generate-multiple', async (req, res) => {
+  try {
+    const { scheduleIds } = req.body;
+    if (!scheduleIds || !Array.isArray(scheduleIds) || scheduleIds.length === 0) {
+      return res.status(400).json({ error: 'scheduleIds must be a non-empty array.' });
+    }
+    const result = await generateMultipleSeatingPlans(scheduleIds);
     res.json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -113,8 +126,5 @@ router.post('/reallocate/:studentId/:scheduleId', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
-
 
 module.exports = router;

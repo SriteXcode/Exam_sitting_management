@@ -11,6 +11,7 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import EventIcon from '@mui/icons-material/Event';
 import EventSeatIcon from '@mui/icons-material/EventSeat';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const drawerWidth = 240;
 
@@ -25,6 +26,7 @@ const Sidebar = () => {
     { text: 'Exam Schedule', icon: <EventIcon />, path: '/schedules' },
     { text: 'Seating Plan', icon: <EventSeatIcon />, path: '/seating' },
     { text: 'Import Data', icon: <CloudUploadIcon />, path: '/import' },
+    { text: 'Profile', icon: <AccountCircleIcon />, path: '/profile' },
   ];
 
   return (
@@ -43,7 +45,7 @@ const Sidebar = () => {
       <Toolbar />
       <List>
         {menuItems.map((item) => (
-          <ListItem button component={Link} to={item.path} key={item.text}>
+          <ListItem button="true" component={Link} to={item.path} key={item.text}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
           </ListItem>

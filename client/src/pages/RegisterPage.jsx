@@ -1,13 +1,12 @@
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { TextField, Button, Container, Typography } from '@mui/material';
 import API from '../services/api';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    username: '',
     password: '',
   });
   const navigate = useNavigate();
@@ -33,17 +32,8 @@ const RegisterPage = () => {
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
-          label="Name"
-          name="name"
-          fullWidth
-          margin="normal"
-          onChange={handleChange}
-          required
-        />
-        <TextField
-          label="Email"
-          name="email"
-          type="email"
+          label="Username"
+          name="username"
           fullWidth
           margin="normal"
           onChange={handleChange}
@@ -62,6 +52,9 @@ const RegisterPage = () => {
           Register
         </Button>
       </form>
+      <Typography align='center' sx={{ mt: 2 }}>
+        Already have an account? <Link to="/login">Login</Link>
+      </Typography>
     </Container>
   );
 };

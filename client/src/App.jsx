@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Box, CssBaseline, Toolbar } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Sidebar from './components/Sidebar';
@@ -16,6 +16,9 @@ import { SeatingPlanProvider } from './contexts/SeatingPlanContext';
 const theme = createTheme();
 
 function App() {
+  const location = useLocation();
+  const noSidebarRoutes = ['/login', '/register'];
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -27,15 +30,13 @@ function App() {
                 <InvigilatorProvider>
                   <ExamScheduleProvider>
                     <SeatingPlanProvider>
-                      <Router>
-                        <Box sx={{ display: 'flex' }}>
-                          <Sidebar />
-                          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                            <Toolbar />
-                            <AppRoutes />
-                          </Box>
+                      <Box sx={{ display: 'flex' }}>
+                        {!noSidebarRoutes.includes(location.pathname) && <Sidebar />}
+                        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                          {!noSidebarRoutes.includes(location.pathname) && <Toolbar />}
+                          <AppRoutes />
                         </Box>
-                      </Router>
+                      </Box>
                     </SeatingPlanProvider>
                   </ExamScheduleProvider>
                 </InvigilatorProvider>

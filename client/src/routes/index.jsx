@@ -13,6 +13,7 @@ import DataImport from '../pages/DataImport';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import ProtectedRoute from '../components/ProtectedRoute';
+import ProfilePage from '../pages/ProfilePage';
 
 const AppRoutes = () => {
   return (
@@ -54,6 +55,10 @@ const AppRoutes = () => {
       <Route
         path="/import"
         element={<ProtectedRoute><DataImport /></ProtectedRoute>}
+      />
+      <Route
+        path="/profile"
+        element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}
       />
     </Routes>
   );

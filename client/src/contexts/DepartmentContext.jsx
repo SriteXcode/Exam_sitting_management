@@ -1,5 +1,63 @@
 
-import React, { createContext, useState, useContext } from 'react';
+// import React, { createContext, useState, useContext, useEffect } from 'react';
+// import API from '../services/api';
+
+// const DepartmentContext = createContext(null);
+
+// export const DepartmentProvider = ({ children }) => {
+//   const [departments, setDepartments] = useState([]);
+
+//   const fetchDepartments = async () => {
+//     const response = await API.get('/departments');
+//     setDepartments(response.data);
+//   };
+
+//   useEffect(() => {
+//     fetchDepartments();
+//   }, []);
+
+//   const addDepartment = async (name) => {
+//     await API.post('/departments', { name });
+//     fetchDepartments();
+//   };
+
+//   const updateDepartment = async (id, name) => {
+//     await API.put(`/departments/${id}`, { name });
+//     fetchDepartments();
+//   };
+
+//   const deleteDepartment = async (id) => {
+//     await API.delete(`/departments/${id}`);
+//     fetchDepartments();
+//   };
+
+//   return (
+//     <DepartmentContext.Provider
+//       value={{
+//         departments,
+//         fetchDepartments,
+//         addDepartment,
+//         updateDepartment,
+//         deleteDepartment,
+//       }}
+//     >
+//       {children}
+//     </DepartmentContext.Provider>
+//   );
+// };
+
+// export const useDepartment = () => useContext(DepartmentContext);
+
+
+
+
+
+
+
+
+
+
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import API from '../services/api';
 
 const DepartmentContext = createContext(null);
@@ -7,26 +65,51 @@ const DepartmentContext = createContext(null);
 export const DepartmentProvider = ({ children }) => {
   const [departments, setDepartments] = useState([]);
 
+  // Fetch all departments
   const fetchDepartments = async () => {
-    const response = await API.get('/departments');
-    setDepartments(response.data);
+    try {
+      const response = await API.get('/departments');
+      setDepartments(response.data);
+    } catch (error) {
+      console.error('Failed to fetch departments:', error);
+    }
   };
 
-  const addDepartment = async (name) => {
-    const response = await API.post('/departments', { name });
-    setDepartments([...departments, response.data]);
+  useEffect(() => {
+    fetchDepartments();
+  }, []);
+
+  // Add a new department
+  const addDepartment = async (department) => {
+    try {
+      await API.post('/departments', department);
+      fetchDepartments();
+    } catch (error) {
+      console.error('Error adding department:', error);
+      throw error;
+    }
   };
 
-  const updateDepartment = async (id, name) => {
-    const response = await API.put(`/departments/${id}`, { name });
-    setDepartments(
-      departments.map((d) => (d._id === id ? response.data : d))
-    );
+  // Update an existing department
+  const updateDepartment = async (id, department) => {
+    try {
+      await API.put(`/departments/${id}`, department);
+      fetchDepartments();
+    } catch (error) {
+      console.error('Error updating department:', error);
+      throw error;
+    }
   };
 
+  // Delete a department
   const deleteDepartment = async (id) => {
-    await API.delete(`/departments/${id}`);
-    setDepartments(departments.filter((d) => d._id !== id));
+    try {
+      await API.delete(`/departments/${id}`);
+      fetchDepartments();
+    } catch (error) {
+      console.error('Error deleting department:', error);
+      throw error;
+    }
   };
 
   return (
@@ -44,4 +127,4 @@ export const DepartmentProvider = ({ children }) => {
   );
 };
 
-export const useDepartments = () => useContext(DepartmentContext);
+export const useDepartment = () => useContext(DepartmentContext);

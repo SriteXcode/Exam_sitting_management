@@ -14,7 +14,7 @@ router.post('/add', async (req, res) => {
 
 // READ ALL
 router.get('/', async (req, res) => {
-  const subjects = await Subject.find();
+  const subjects = await Subject.find().populate('department', 'name');
   res.json(subjects);
 });
 
@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const subject = await Subject.findById(req.params.id);
   res.json(subject);
-});
+}); 
 
 // UPDATE
 router.put('/:id', async (req, res) => {

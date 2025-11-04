@@ -1,6 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
-import { useInvigilators } from '../contexts/InvigilatorContext';
+import React, { useState } from 'react';
+import { useInvigilator } from '../contexts/InvigilatorContext';
 import {
   Table,
   TableBody,
@@ -21,14 +21,10 @@ import {
 } from '@mui/material';
 
 const InvigilatorManagement = () => {
-  const { invigilators, fetchInvigilators, addInvigilator, updateInvigilator, deleteInvigilator, updateInvigilatorAvailability } = useInvigilators();
+  const { invigilators, addInvigilator, updateInvigilator, deleteInvigilator, updateInvigilatorAvailability } = useInvigilator();
   const [open, setOpen] = useState(false);
   const [currentInvigilator, setCurrentInvigilator] = useState(null);
   const [formData, setFormData] = useState({ name: '', isAvailable: true });
-
-  useEffect(() => {
-    fetchInvigilators();
-  }, []);
 
   const handleOpen = (invigilator = null) => {
     setCurrentInvigilator(invigilator);

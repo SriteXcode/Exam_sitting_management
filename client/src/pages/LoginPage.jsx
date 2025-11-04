@@ -1,19 +1,19 @@
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { TextField, Button, Container, Typography } from '@mui/material';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuthContext } from '../contexts/AuthContext';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth();
+  const { login } = useAuthContext();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
+      await login(username, password);
       navigate('/');
     } catch (error) {
       console.error('Login failed', error);
@@ -27,12 +27,12 @@ const LoginPage = () => {
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
-          label="Email"
-          type="email"
+          label="Username"
+          type="text"
           fullWidth
           margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
         <TextField
@@ -48,6 +48,9 @@ const LoginPage = () => {
           Login
         </Button>
       </form>
+      <Typography align='center' sx={{ mt: 2 }}>
+        Don't have an account? <Link to="/register">Register</Link>
+      </Typography>
     </Container>
   );
 };

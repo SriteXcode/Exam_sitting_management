@@ -1,6 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
-import { useExamHalls } from '../contexts/ExamHallContext';
+import React, { useState } from 'react';
+import { useExamHall } from '../contexts/ExamHallContext';
 import {
   Table,
   TableBody,
@@ -19,14 +19,10 @@ import {
 } from '@mui/material';
 
 const ExamHallManagement = () => {
-  const { examHalls, fetchExamHalls, addExamHall, updateExamHall, deleteExamHall } = useExamHalls();
+  const { examHalls, addExamHall, updateExamHall, deleteExamHall } = useExamHall();
   const [open, setOpen] = useState(false);
   const [currentExamHall, setCurrentExamHall] = useState(null);
   const [formData, setFormData] = useState({ name: '', capacity: '' });
-
-  useEffect(() => {
-    fetchExamHalls();
-  }, []);
 
   const handleOpen = (hall = null) => {
     setCurrentExamHall(hall);

@@ -1,8 +1,8 @@
 
-import React, { useEffect, useState } from 'react';
-import { useSeatingPlans } from '../contexts/SeatingPlanContext';
-import { useExamSchedules } from '../contexts/ExamScheduleContext';
-import { useExamHalls } from '../contexts/ExamHallContext';
+import React, { useState } from 'react';
+import { useSeatingPlan } from '../contexts/SeatingPlanContext';
+import { useExamSchedule } from '../contexts/ExamScheduleContext';
+import { useExamHall } from '../contexts/ExamHallContext';
 import {
   Button,
   Typography,
@@ -20,17 +20,12 @@ import {
 } from '@mui/material';
 
 const SeatingPlan = () => {
-  const { generateSeatingPlan, getSeatingPlanByHall } = useSeatingPlans();
-  const { schedules, fetchSchedules } = useExamSchedules();
-  const { examHalls, fetchExamHalls } = useExamHalls();
+  const { generateSeatingPlan, getSeatingPlanByHall } = useSeatingPlan();
+  const { schedules } = useExamSchedule();
+  const { examHalls } = useExamHall();
   const [selectedSchedule, setSelectedSchedule] = useState('');
   const [selectedHall, setSelectedHall] = useState('');
   const [seatingPlan, setSeatingPlan] = useState([]);
-
-  useEffect(() => {
-    fetchSchedules();
-    fetchExamHalls();
-  }, []);
 
   const handleGenerate = async () => {
     if (selectedSchedule) {

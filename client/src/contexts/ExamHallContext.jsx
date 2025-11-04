@@ -1,5 +1,5 @@
 
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import API from '../services/api';
 
 const ExamHallContext = createContext(null);
@@ -12,19 +12,23 @@ export const ExamHallProvider = ({ children }) => {
     setExamHalls(response.data);
   };
 
+  useEffect(() => {
+    fetchExamHalls();
+  }, []);
+
   const addExamHall = async (hall) => {
-    const response = await API.post('/halls/add', hall);
-    setExamHalls([...examHalls, response.data]);
+    await API.post('/halls/add', hall);
+    fetchExamHalls();
   };
 
   const updateExamHall = async (id, hall) => {
-    const response = await API.put(`/halls/${id}`, hall);
-    setExamHalls(examHalls.map((h) => (h._id === id ? response.data : h)));
+    await API.put(`/halls/${id}`, hall);
+    fetchExamHalls();
   };
 
   const deleteExamHall = async (id) => {
     await API.delete(`/halls/${id}`);
-    setExamHalls(examHalls.filter((h) => h._id !== id));
+    fetchExamHalls();
   };
 
   return (
@@ -42,4 +46,4 @@ export const ExamHallProvider = ({ children }) => {
   );
 };
 
-export const useExamHalls = () => useContext(ExamHallContext);
+export const useExamHall = () => useContext(ExamHallContext);

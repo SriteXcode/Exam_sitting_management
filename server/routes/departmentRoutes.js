@@ -9,7 +9,7 @@ router.get('/', protect, async (req, res) => {
     res.json(departments);
 });
 
-// Add a new department
+// Add a new department  
 router.post('/', protect, authorize('admin'), async (req, res) => {
     const { name } = req.body;
     const department = new Department({ name });
